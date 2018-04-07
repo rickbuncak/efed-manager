@@ -1,7 +1,7 @@
 var mongoose = require("mongoose"),
 	Schema = mongoose.Schema;
 var passportLM = require("passport-local-mongoose");
-var URLSlugs = require('mongoose-url-slugs');
+
 
 var UserSchema = new mongoose.Schema({
 	username: {
@@ -9,10 +9,24 @@ var UserSchema = new mongoose.Schema({
 		unique: true
 	},
 	password: String,
-
+	joinedDate: {type: Number, default: Date.now},
+	isAdmin: { type: Boolean, default: false},
+	displayName: String,
+	location: String,
+	wrestlers: [
+		{
+			type: mongoose.Schema.Types.ObjectId,
+			ref: "Wrestler"
+		}
+	],
+	accomplishments: [
+		{
+			type: mongoose.Schema.Types.ObjectId,
+			ref: "Accomplishment"
+		}
+	]
 });
 
 UserSchema.plugin(passportLM);
-UserSchema.plugin(URLSlugs('username'));
 
 module.exports = mongoose.model("User", UserSchema);

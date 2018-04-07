@@ -10,7 +10,8 @@ var express = require("express"),
 var User = require("./models/user");
 
 // required routes
-var userRoutes = require("./routes/index");
+var rootRoutes = require("./routes/index"),
+	userRoutes = require("./routes/users");
 
 // app setup
 var app = express();
@@ -37,7 +38,8 @@ app.use(function(req, res, next){
     next();
 });
 
-app.use("/", userRoutes);
+app.use("/", rootRoutes);
+app.use("/members", userRoutes);
 
 app.listen(3000, process.env.IP, function(){
     console.log("Server start");
