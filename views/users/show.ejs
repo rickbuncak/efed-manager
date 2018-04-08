@@ -1,5 +1,9 @@
+<% include ../partials/header %>
+
 <h1><%= user.username %></h1>
 <p><%= user.displayName %></p>
 <p><%= user.location %></p>
 <p><%= user.joinedDate %></p>
 <a class="btn btn-warning" href="/members/<%= user.username %>/edit">Edit</a>
+
+<% include ../partials/footer %>
