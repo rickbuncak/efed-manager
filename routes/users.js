@@ -2,6 +2,7 @@ var express = require("express");
 var router = express.Router();
 var passport = require("passport");
 var User = require("../models/user");
+var middleware = require("../middleware");
 
 // index user route
 router.get("/", function(req, res){
@@ -27,14 +28,14 @@ router.get("/:username", function(req, res){
 });
 
 // edit user route
-router.get("/:username/edit", function(req, res) {
+router.get("/:username/edit", middleware.checkUserIdentity, function(req, res) {
     User.findOne({username: req.params.username}, function(err, foundUser){
         res.render("users/edit", {user: foundUser}); 
     });
 });
 
 // update user route
-router.put("/:username", function(req, res){
+router.put("/:username", middleware.checkUserIdentity, function(req, res){
     User.findOneAndUpdate({username: req.params.username}, req.body.user, function(err, updatedUser){
         if(err) {
             res.redirect("/members");

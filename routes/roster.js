@@ -4,6 +4,7 @@ var passport = require("passport");
 var moment = require("moment");
 var User = require("../models/user");
 var Wrestler = require("../models/wrestler");
+var middleware = require("../middleware");
 
 // index roster route
 router.get("/", function(req, res){
@@ -18,13 +19,13 @@ router.get("/", function(req, res){
 });
 
 // wrestler application form
-router.get("/apply", function(req, res){
+router.get("/apply", middleware.isLoggedIn, function(req, res){
 	res.render("roster/contract");
 	console.log(req.user);
 });
 
 // application post route
-router.post("/", function(req, res){
+router.post("/", middleware.isLoggedIn, function(req, res){
 	User.findById(req.user._id, function(err, user){
 		if(err){
             console.log(err);
@@ -64,14 +65,14 @@ router.get("/:slug", function(req, res){
 });
 
 // edit profile route
-router.get("/:slug/edit", function(req, res) {
+router.get("/:slug/edit", middleware.checkWrestlerController, function(req, res) {
     Wrestler.findOne({slug: req.params.slug}, function(err, foundWrestler){
         res.render("roster/edit", {wrestler: foundWrestler}); 
     });
 });
 
 // update profile route
-router.put("/:slug", function(req, res){
+router.put("/:slug", middleware.checkWrestlerController, function(req, res){
     Wrestler.findOneAndUpdate({slug: req.params.slug}, req.body.wrestler, function(err, updatedWrestler){
         if(err) {
             res.redirect("/roster");
