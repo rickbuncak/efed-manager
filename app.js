@@ -7,11 +7,13 @@ var express = require("express"),
 	flash = require("connect-flash");
 
 // required models
-var User = require("./models/user");
+var User = require("./models/user"),
+	Wrestler = require("./models/wrestler");
 
 // required routes
 var rootRoutes = require("./routes/index"),
-	userRoutes = require("./routes/users");
+	userRoutes = require("./routes/users"),
+	rosterRoutes = require("./routes/roster");
 
 // app setup
 var app = express();
@@ -40,6 +42,7 @@ app.use(function(req, res, next){
 
 app.use("/", rootRoutes);
 app.use("/members", userRoutes);
+app.use("/roster", rosterRoutes)
 
 app.listen(3000, process.env.IP, function(){
     console.log("Server start");

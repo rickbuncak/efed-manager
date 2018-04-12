@@ -1,0 +1,33 @@
+<% include ../partials/header %>
+
+<h1>Sign a Contract</h1>
+
+<form action="/roster" method="POST">
+	<label for="wrestler[name]">
+		Name:
+    	<input type="text" name="wrestler[name]" placeholder="AJ Styles">
+    </label>
+    <label for="wrestler[nickname]">
+		Name:
+    	<input type="text" name="wrestler[nickname]" placeholder="The Phenomenal">
+    </label>
+    <label for="wrestler[weight]">
+		Weight:
+    	<input type="text" name="wrestler[weight]" placeholder="218 lbs">
+    </label>
+    <label for="wrestler[hometown]">
+		Email:
+    	<input type="text" name="wrestler[hometown]" placeholder="Gainesville, GA">
+    </label>
+    <label for="wrestler[finisher]">
+		Finishing Move:
+    	<input type="text" name="wrestler[finisher]" placeholder="Styles Clash">
+    </label>
+    <label for="wrestler[themeMusic]">
+		Email:
+    	<input type="text" name="wrestler[themeMusic]" placeholder="&quot;Phenomenal&quot; by CFO$">
+    </label>
+    <button>Submit</button>
+</form>
+
+<% include ../partials/footer %>

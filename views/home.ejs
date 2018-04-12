@@ -2,12 +2,4 @@
 
 <h1>Home Page</h1>
 
-					<% if(!currentUser){ %>
-		                <li><a href="/login">Login</a></li>
-		                <li><a href="/register">Sign Up</a></li>
-		            <% } else { %>
-		            	<li><a>Signed in as <%= currentUser.username %></a></li>
-		                <li><a href="/logout">Logout</a></li>
-		           	<% } %>
-
 <% include ./partials/footer %>

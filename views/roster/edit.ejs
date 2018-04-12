@@ -1,0 +1,32 @@
+<% include ../partials/header %>
+
+<form action="/roster/<%= wrestler.slug %>?_method=PUT" method="POST">
+    <label for="wrestler[name]">
+        Name:
+        <input type="text" name="wrestler[name]" value="<%= wrestler.name %>">
+    </label>
+    <label for="wrestler[nickname]">
+        Name:
+        <input type="text" name="wrestler[nickname]" value="<%= wrestler.nickname %>">
+    </label>
+    <label for="wrestler[weight]">
+        Weight:
+        <input type="text" name="wrestler[weight]" value="<%= wrestler.weight %>">
+    </label>
+    <label for="wrestler[hometown]">
+        Email:
+        <input type="text" name="wrestler[hometown]" value="<%= wrestler.hometown %>">
+    </label>
+    <label for="wrestler[finisher]">
+        Finishing Move:
+        <input type="text" name="wrestler[finisher]" value="<%= wrestler.finisher %>">
+    </label>
+    <label for="wrestler[themeMusic]">
+        Email:
+        <input type="text" name="wrestler[themeMusic]" value="<%= wrestler.themeMusic %>">
+    </label>
+    <button>Submit</button>
+</form>
+
+
+<% include ../partials/footer %>

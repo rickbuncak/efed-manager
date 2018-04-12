@@ -9,7 +9,7 @@ var UserSchema = new mongoose.Schema({
 		unique: true
 	},
 	password: String,
-	joinedDate: {type: Number, default: Date.now},
+	joinedDate: {type: Date, default: Date.now},
 	isAdmin: { type: Boolean, default: false},
 	displayName: String,
 	location: String,

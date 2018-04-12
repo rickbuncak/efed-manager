@@ -1,0 +1,9 @@
+<% include ../partials/header %>
+
+<ul class="list-group">
+	<% roster.forEach(function(wrestler){ %>
+	<a href="/roster/<%= wrestler.slug %>"><li class="list-group-item"><%= wrestler.name %></li></a>
+	<% }); %>
+</ul>
+
+<% include ../partials/footer %>
