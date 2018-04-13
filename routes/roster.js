@@ -9,7 +9,7 @@ var middleware = require("../middleware");
 // index roster route
 router.get("/", function(req, res){
 	// get users from database
-	Wrestler.find({isActive: true}, function(err, activeRoster){
+	Wrestler.find({isActive: true}, null, {sort: {slug: 1}}, function(err, activeRoster){
 		if(err){
 			console.log(err);
 		} else {
@@ -37,7 +37,7 @@ router.post("/", middleware.isLoggedIn, function(req, res){
 				} else {
 					// add username and id to comment
 					wrestler.controller.id = req.user._id;
-					wrestler.controller.displayName = req.user.display;
+					wrestler.controller.displayName = req.user.displayName;
 					// save comment
 					wrestler.save();
 					user.wrestlers.push(wrestler);

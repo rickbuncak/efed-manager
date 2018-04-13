@@ -1,0 +1,28 @@
+<% include ../partials/header %>
+
+<h1>Post Roleplay</h1>
+
+<form action="/roleplays/<%= roleplay.controller.username %>/<%= roleplay.slug %>?_method=PUT" method="POST">
+	<label for="title">
+		Name:
+    	<input type="text" name="title" value="<%= roleplay.title %>">
+    </label>
+    <label for="wrestler">
+		Name:
+    	<select name="wrestler">
+    		<% user.wrestlers.forEach(function(wrestler){ %>
+				<option value="<%= wrestler._id %>,<%= wrestler.name %>" 
+					<% if(JSON.stringify(wrestler._id) == JSON.stringify(roleplay.wrestler.id)) { %> selected <% } %>>
+					<%= wrestler.name %>
+				</option>
+			<% }); %>
+		</select>
+    </label>
+    <label for="content">
+		Weight:
+    	<textarea name="content"><%= roleplay.content %></textarea>
+    </label>
+    <button>Submit</button>
+</form>
+
+<% include ../partials/footer %>

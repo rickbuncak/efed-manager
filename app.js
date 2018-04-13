@@ -8,12 +8,14 @@ var express = require("express"),
 
 // required models
 var User = require("./models/user"),
-	Wrestler = require("./models/wrestler");
+	Wrestler = require("./models/wrestler"),
+	Roleplay = require("./models/roleplay");
 
 // required routes
 var rootRoutes = require("./routes/index"),
 	userRoutes = require("./routes/users"),
-	rosterRoutes = require("./routes/roster");
+	rosterRoutes = require("./routes/roster"),
+	rpRoutes = require("./routes/roleplays");
 
 // app setup
 var app = express();
@@ -50,7 +52,8 @@ app.use(function(req, res, next){
 
 app.use("/", rootRoutes);
 app.use("/members", userRoutes);
-app.use("/roster", rosterRoutes)
+app.use("/roster", rosterRoutes);
+app.use("/roleplays", rpRoutes);
 
 app.listen(3000, process.env.IP, function(){
     console.log("Server start");

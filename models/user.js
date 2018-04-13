@@ -13,10 +13,17 @@ var UserSchema = new mongoose.Schema({
 	isAdmin: { type: Boolean, default: false},
 	displayName: String,
 	location: String,
-	wrestlers: [
-		{
+	wrestlers: [{
+		id: {
 			type: mongoose.Schema.Types.ObjectId,
 			ref: "Wrestler"
+		},
+        name: String
+	}],
+	roleplays: [
+		{
+			type: mongoose.Schema.Types.ObjectId,
+			ref: "Roleplay"
 		}
 	],
 	accomplishments: [

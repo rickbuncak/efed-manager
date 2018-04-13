@@ -1,0 +1,25 @@
+<% include ../partials/header %>
+
+<h1>Post Roleplay</h1>
+
+<form action="/roleplays" method="POST">
+	<label for="roleplay[title]">
+		Name:
+    	<input type="text" name="roleplay[title]" placeholder="Roleplay Title">
+    </label>
+    <label for="roleplay[wrestler]">
+		Name:
+    	<select name="wrestler">
+    		<% user.wrestlers.forEach(function(wrestler){ %>
+			<option value="<%= wrestler._id %>,<%= wrestler.name %>"><%= wrestler.name %></option>
+			<% }); %>
+		</select>
+    </label>
+    <label for="roleplay[content]">
+		Weight:
+    	<textarea name="roleplay[content]" placeholder="Lorem ipsum dolor sit amet, consectetur adipiscing elit."></textarea>
+    </label>
+    <button>Submit</button>
+</form>
+
+<% include ../partials/footer %>

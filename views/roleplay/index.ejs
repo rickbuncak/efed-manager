@@ -1,0 +1,10 @@
+<% include ../partials/header %>
+
+<ul class="list-group">
+	<% roleplay.forEach(function(roleplay){ %>
+	<a href="/roleplays/<%= roleplay.controller.username %>/<%= roleplay.slug %>"><li class="list-group-item"><%= roleplay.title %> | <%= roleplay.controller.username %></li></a>
+	<% }); %>
+</ul>
+<a class="btn btn-warning" href="/roleplays/post">Post a roleplay</a>
+
+<% include ../partials/footer %>
