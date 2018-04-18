@@ -2,17 +2,17 @@
 
 <h1>Post Roleplay</h1>
 
-<form action="/roleplays/<%= roleplay.controller.username %>/<%= roleplay.slug %>?_method=PUT" method="POST">
+<form action="/roleplays/<%= roleplay.email %>/<%= roleplay.slug %>?_method=PUT" method="POST">
 	<label for="title">
 		Name:
     	<input type="text" name="title" value="<%= roleplay.title %>">
     </label>
     <label for="wrestler">
 		Name:
-    	<select name="wrestler">
-    		<% user.wrestlers.forEach(function(wrestler){ %>
-				<option value="<%= wrestler._id %>,<%= wrestler.name %>" 
-					<% if(JSON.stringify(wrestler._id) == JSON.stringify(roleplay.wrestler.id)) { %> selected <% } %>>
+    	<select name="wrestler_id">
+    		<% wrestler.forEach(function(wrestler){ %>
+				<option value="<%= wrestler.wrestler_id %>" 
+					<% if(JSON.stringify(wrestler.wrestler_id) == JSON.stringify(roleplay.wrestler_id)) { %> selected <% } %>>
 					<%= wrestler.name %>
 				</option>
 			<% }); %>

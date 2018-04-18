@@ -1,29 +1,29 @@
 <% include ../partials/header %>
 
 <form action="/roster/<%= wrestler.slug %>?_method=PUT" method="POST">
-    <label for="wrestler[name]">
+    <label for="name">
         Name:
-        <input type="text" name="wrestler[name]" value="<%= wrestler.name %>">
+        <input type="text" name="name" value="<%= wrestler.name %>">
     </label>
-    <label for="wrestler[nickname]">
+    <label for="nickname">
         Name:
-        <input type="text" name="wrestler[nickname]" value="<%= wrestler.nickname %>">
+        <input type="text" name="nickname" value="<%= wrestler.nickname %>">
     </label>
-    <label for="wrestler[weight]">
+    <label for="weight">
         Weight:
-        <input type="text" name="wrestler[weight]" value="<%= wrestler.weight %>">
+        <input type="text" name="weight" value="<%= wrestler.weight %>">
     </label>
-    <label for="wrestler[hometown]">
+    <label for="hometown">
         Email:
-        <input type="text" name="wrestler[hometown]" value="<%= wrestler.hometown %>">
+        <input type="text" name="hometown" value="<%= wrestler.hometown %>">
     </label>
-    <label for="wrestler[finisher]">
+    <label for="finisher">
         Finishing Move:
-        <input type="text" name="wrestler[finisher]" value="<%= wrestler.finisher %>">
+        <input type="text" name="finisher" value="<%= wrestler.finisher %>">
     </label>
-    <label for="wrestler[themeMusic]">
+    <label for="themeMusic">
         Email:
-        <input type="text" name="wrestler[themeMusic]" value="<%= wrestler.themeMusic %>">
+        <input type="text" name="themeMusic" value="<%= wrestler.themeMusic %>">
     </label>
     <button>Submit</button>
 </form>

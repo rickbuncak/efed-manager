@@ -1,15 +1,24 @@
 var express = require("express");
 var router = express.Router();
 var passport = require("passport");
-var moment = require("moment");
-var User = require("../models/user");
-var Wrestler = require("../models/wrestler");
+const slugify = require('slugify');
+const db = require('../db.js');
+var dateOption = { year: 'numeric', month: 'long', day: 'numeric' };
 var middleware = require("../middleware");
+
+// router.get('/createtable', (req,res) => {
+// 	let sql = 'CREATE TABLE roster (wrestler_id INT AUTO_INCREMENT, name VARCHAR(255) NOT NULL, slug VARCHAR(255) NOT NULL, nickname VARCHAR(255), debutDate DATE, user_id INT, isActive BOOLEAN NOT NULL DEFAULT 1, weight VARCHAR(255), hometown VARCHAR(255), finisher VARCHAR(255), themeMusic VARCHAR(255), PRIMARY KEY (wrestler_id), FOREIGN KEY (user_id) REFERENCES users(user_id))';
+// 	db.query(sql, (err, result) => {
+// 		if(err) throw err;
+// 		console.log(result);
+// 		res.send('Roster table created');
+// 	});
+// });
 
 // index roster route
 router.get("/", function(req, res){
 	// get users from database
-	Wrestler.find({isActive: true}, null, {sort: {slug: 1}}, function(err, activeRoster){
+	db.query('SELECT * FROM roster WHERE isActive = 1 ORDER BY name', function(err, activeRoster, fields){
 		if(err){
 			console.log(err);
 		} else {
@@ -26,54 +35,55 @@ router.get("/apply", middleware.isLoggedIn, function(req, res){
 
 // application post route
 router.post("/", middleware.isLoggedIn, function(req, res){
-	User.findById(req.user._id, function(err, user){
+	let name = req.body.name;
+	let slug = slugify(req.body.name, {
+  		replacement: '_',    // replace spaces with replacement
+  		remove: null,        // regex to remove characters
+  		lower: true          // result in lower case
+	});
+	let nickname = req.body.nickname;
+	let weight = req.body.weight;
+	let hometown = req.body.hometown;
+	let finisher = req.body.finisher;
+	let themeMusic = req.body.themeMusic;
+	let currentUser_id = req.user.user_id;
+	db.query('INSERT INTO roster (name, slug, nickname, debutDate, user_id, weight, hometown, finisher, themeMusic) VALUES (?, ?, ?, now(), ?, ?, ?, ?, ?)', [name, slug, nickname, currentUser_id, weight, hometown, finisher, themeMusic], (err, results, fields) =>{
 		if(err){
-            console.log(err);
-            res.redirect("/");
-        } else {
-			Wrestler.create(req.body.wrestler, function(err, wrestler){
-		      	if(err){
-					console.log(err);
-				} else {
-					// add username and id to comment
-					wrestler.controller.id = req.user._id;
-					wrestler.controller.displayName = req.user.displayName;
-					// save comment
-					wrestler.save();
-					user.wrestlers.push(wrestler);
-					user.save();
-					console.log(wrestler);
-					// req.flash("success", "Successfully added comment.");
-					res.redirect("/roster");
-		        }
-		   	})
+			console.log(err);
+		} else {
+			res.redirect('/');
 		}
 	});
 });
 
 // show profile route
 router.get("/:slug", function(req, res){
-	Wrestler.findOne({slug: req.params.slug}, function(err, foundWrestler){
+	db.query('SELECT * FROM roster WHERE slug = ?', [req.params.slug], function(err, foundWrestler, fields){
 		if(err || !foundWrestler){
 			console.log(err);
 		} else {
-			foundWrestler.debut = moment(foundWrestler.debutDate).format("LL"); 
-			res.render("roster/profile", {wrestler: foundWrestler});
-
+			db.query('SELECT users.email, users.displayName FROM users INNER JOIN roster ON users.user_id=roster.user_id', function(err, foundUser, fields){
+				if(err){
+					console.log(err);
+				} else {
+					res.render("roster/profile", {wrestler: foundWrestler[0], user: foundUser[0], dateOption: dateOption});
+				}
+			});
 		}
 	});
 });
 
 // edit profile route
 router.get("/:slug/edit", middleware.checkWrestlerController, function(req, res) {
-    Wrestler.findOne({slug: req.params.slug}, function(err, foundWrestler){
-        res.render("roster/edit", {wrestler: foundWrestler}); 
+	db.query('SELECT * FROM roster WHERE slug = ?', [req.params.slug], function(err, foundWrestler, fields){
+		console.log(foundWrestler);
+        res.render("roster/edit", {wrestler: foundWrestler[0]}); 
     });
 });
 
 // update profile route
 router.put("/:slug", middleware.checkWrestlerController, function(req, res){
-    Wrestler.findOneAndUpdate({slug: req.params.slug}, req.body.wrestler, function(err, updatedWrestler){
+    db.query('UPDATE roster SET name = ?, nickname = ?, weight = ?, hometown = ?, finisher = ?, themeMusic = ? WHERE slug = ?', [req.body.name, req.body.nickname,  req.body.weight, req.body.hometown, req.body.finisher, req.body.themeMusic ,req.params.slug], function(err, foundWrestler, fields){
         if(err) {
             res.redirect("/roster");
         } else {

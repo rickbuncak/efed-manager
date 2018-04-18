@@ -1,10 +1,10 @@
 <% include ../partials/header %>
 
-<p><%= roleplay.wrestler.name %></p>
+<p><%= roleplay.name %></p>
 <h1><%= roleplay.title %></h1>
-<p><%= roleplay.controller.displayName %></p>
+<p><%= roleplay.displayName %></p>
 <p><%= roleplay.datePosted %></p>
 <p><%= roleplay.content %></p>
-<a class="btn btn-warning" href="/roleplays/<%= roleplay.controller.username %>/<%= roleplay.slug %>/edit">Edit Profile</a>
+<a class="btn btn-warning" href="/roleplays/<%= roleplay.email %>/<%= roleplay.slug %>/edit">Edit Profile</a>
 
 <% include ../partials/footer %>

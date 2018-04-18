@@ -1,7 +1,7 @@
 <% include ../partials/header %>
 
 <% users.forEach(function(user){ %>
-	<a href="/members/<%= user.username %>"><li><%= user.username %></li></a>
+	<a href="/members/<%= user.email %>"><li><%= user.email %></li></a>
 <% }); %>
 
 <% include ../partials/footer %>

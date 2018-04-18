@@ -2,8 +2,8 @@
 
 <p><%= wrestler.nickname %></p>
 <h1><%= wrestler.name %></h1>
-<p><%= wrestler.controller.displayName %></p>
-<p><%= wrestler.debut %></p>
+<p><%= user.displayName || user.email %></p>
+<p><%= wrestler.debutDate.toLocaleDateString("en-US",dateOption) %></p>
 <p><%= wrestler.weight %></p>
 <p><%= wrestler.hometown %></p>
 <p><%= wrestler.finisher %></p>

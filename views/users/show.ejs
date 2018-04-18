@@ -1,9 +1,7 @@
 <% include ../partials/header %>
-
-<h1><%= user.username %></h1>
-<p><%= user.displayName %></p>
-<p><%= user.location %></p>
-<p><%= user.joinedDate %></p>
-<a class="btn btn-warning" href="/members/<%= user.username %>/edit">Edit</a>
-
+	<h1><%= user.email %></h1>
+	<p><%= user.displayName %></p>
+	<p><%= user.location %></p>
+	<p><%= user.joinDate.toLocaleDateString("en-US",dateOption) %></p>
+	<a class="btn btn-warning" href="/members/<%= user.email %>/edit">Edit</a>
 <% include ../partials/footer %>

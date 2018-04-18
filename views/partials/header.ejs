@@ -56,3 +56,11 @@
 			<%= success %>
 		</div>
 	<% } %>
+	<% if(errors && errors.length > 0){ %>
+  		<% errors.forEach(function(error){ %>
+			<div class="alert alert-danger" role="alert">
+				<%= error.msg %>
+			</div>
+		<% }); %>
+	<% } %>
+
