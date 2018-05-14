@@ -10,7 +10,7 @@ middlewareObj.checkUserIdentity = function(req, res, next) {
                 req.flash("error", "User not found.");
                 res.redirect("back");
             } else {
-                // does user own campground
+                // does user own profile
                 if(foundUser[0].user_id == req.user.user_id){
                     next();
                 } else {
@@ -32,7 +32,7 @@ middlewareObj.checkWrestlerController = function(req, res, next) {
                 req.flash("error", "Character not found.");
                 res.redirect("back");
             } else {
-                // does user own comment
+                // does user play wrestler
                 if(foundWrestler[0].user_id == req.user.user_id){
                     next();
                 } else {

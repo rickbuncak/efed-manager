@@ -5,6 +5,7 @@ const db = require('../db.js');
 const expressValidator = require('express-validator');
 const bcrypt = require('bcrypt');
 const saltRounds = 10;
+const middleware = require("../middleware");
 
 // router.get('/createusertable', (req,res) => {
 // 	let sql = 'CREATE TABLE users (user_id INT AUTO_INCREMENT, email VARCHAR(255) NOT NULL, password BINARY(60), joinDate DATE, displayName VARCHAR(255), isAdmin BOOLEAN NOT NULL DEFAULT 0, location VARCHAR(255), PRIMARY KEY (user_id))';
@@ -14,6 +15,25 @@ const saltRounds = 10;
 // 		res.send('User table created');
 // 	});
 // });
+
+router.use(function(req, res, next) {
+    if(req.isAuthenticated()){
+    	db.query('SELECT * FROM roster WHERE user_id = ?', [req.user.user_id], function(err, foundWrestler, fields){
+    		if(err || !foundWrestler){
+    			console.log(err);
+			} else if(foundWrestler.length==0) {
+				db.query('UPDATE users SET hasWrestler = false WHERE user_id = ?', [req.user.user_id], function(err, updatedUser, fields){
+					if(err){ console.log(err); }
+				});
+            } else {
+            	db.query('UPDATE users SET hasWrestler = true WHERE user_id = ?', [req.user.user_id], function(err, updatedUser, fields){
+					if(err){ console.log(err); }
+				});
+            }
+        });
+    }
+    next();
+});
 
 // root route
 router.get('/', (req, res) => {
