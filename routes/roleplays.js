@@ -28,7 +28,7 @@ router.get("/", function(req, res){
 });
 
 // roleplay form
-router.get("/post", middleware.isLoggedIn, function(req, res){
+router.get("/post", middleware.checkHasCharacter , function(req, res){
 	let currentUser_id = req.user.user_id;
 	db.query('SELECT wrestler_id, name FROM roster WHERE user_id = ?', [currentUser_id], function(err, foundWrestler, fields){
 		if(err){
@@ -42,7 +42,7 @@ router.get("/post", middleware.isLoggedIn, function(req, res){
 });
 
 // application post route
-router.post("/", middleware.isLoggedIn, function(req, res){
+router.post("/", middleware.checkHasCharacter , function(req, res){
 	let title = req.body.title;
 	let titleShort = req.body.title.split(" ").splice(0,6).join(" ");
 	let slug = slugify(titleShort, {

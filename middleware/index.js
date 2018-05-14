@@ -69,6 +69,28 @@ middlewareObj.checkRoleplayAuthor = function(req, res, next) {
     }
 };
 
+middlewareObj.checkHasCharacter = function(req, res, next) {
+    if(req.isAuthenticated()){
+        db.query('SELECT * FROM users WHERE user_id = ?', [req.user.user_id], function(err, foundUser, fields){
+            if(err || !foundUser){
+                req.flash("error", "User not found.");
+                res.redirect("back");
+            } else {
+                // does user own comment
+                if(foundUser[0].hasWrestler == 1){
+                    next();
+                } else {
+                    req.flash("error", "You don't have permission to do that.");
+                    res.redirect("back");
+                }
+            }
+        });
+    } else {
+        req.flash("error", "You must be logged in to do that.");
+        res.redirect("back");
+    }
+};
+
 middlewareObj.isLoggedIn = function(req, res, next){
     if(req.isAuthenticated()){
         return next();

@@ -17,7 +17,7 @@ const middleware = require("../middleware");
 // });
 
 router.use(function(req, res, next) {
-    if(req.isAuthenticated()){
+    if(req.isAuthenticated() & req.user){
     	db.query('SELECT * FROM roster WHERE user_id = ?', [req.user.user_id], function(err, foundWrestler, fields){
     		if(err || !foundWrestler){
     			console.log(err);
