@@ -1,8 +1,8 @@
 <% include ../partials/header %>
 
-<ul class="list-group">
+<ul class="list-group list-group-flush">
 	<% roster.forEach(function(wrestler){ %>
-	<a href="/roster/<%= wrestler.slug %>"><li class="list-group-item"><%= wrestler.name %></li></a>
+	<li class="list-group-item"><a href="/roster/<%= wrestler.slug %>"><%= wrestler.name %></a></li>
 	<% }); %>
 </ul>
 <a class="btn btn-warning" href="/roster/apply">Sign a contract</a>

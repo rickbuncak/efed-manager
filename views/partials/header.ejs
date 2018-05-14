@@ -2,69 +2,56 @@
 <html>
 <head>
 	<title>Efed Manager</title>
-	<link href="https://stackpath.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
-	<link rel="stylesheet" type="text/css" href="/css/main.css">
+	<link rel="stylesheet" type="text/css" href="../css/main.css">
+	<link href="http://fonts.googleapis.com/css?family=Oswald:700|Droid+Serif:400,700italic" rel="stylesheet" type="text/css" />
 </head>
 <body>
-		<nav class="navbar navbar-expand-lg navbar-dark bg-dark">
-		  <a class="navbar-brand" href="/">Navbar</a>
-		  <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavDropdown" aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation">
-		    <span class="navbar-toggler-icon"></span>
-		  </button>
-		  <div class="collapse navbar-collapse" id="navbarNavDropdown">
-		    <ul class="navbar-nav mx-auto">
-		      <li class="nav-item">
-		        <a class="nav-link" href="/roster">Roster</a>
-		      </li>
-		      <li class="nav-item">
-		        <a class="nav-link" href="#">Shows</a>
-		      </li>
-		      <li class="nav-item">
-		        <a class="nav-link" href="#">Champions</a>
-		      </li>
-		      <li class="nav-item">
-		        <a class="nav-link" href="/roleplays">Roleplays</a>
-		      </li>
-		    </ul>
-		    <ul class="navbar-nav">
-		      <% if(!currentUser){ %>
-					<li class="nav-item">
-						<a class="nav-link" href="/login">Login</a>
-					</li>
-				    <li class="nav-item">
-				    	<a class="nav-link" href="/register">Sign Up</a>
-				    </li>
-				<% } else { %>
-				    <li class="nav-item dropdown">
-			        <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-			          <%= currentUser.username %>
-			        </a>
-			        <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
-			          <a class="dropdown-item" href="/members/<%= currentUser.username %>/edit">Edit Profile</a>
-			          <a class="dropdown-item" href="/logout">Logout</a>
-			        </div>
-			      </li>
-				<% } %>
-		    </ul>
-		  </div>
-		</nav>
-
-	<div class="container">
-	<% if(error && error.length > 0){ %>
-		<div class="alert alert-danger" role="alert">
-			<%= error %>
+	<nav class="navbar navbar-expand-lg navbar-light bg-light">
+		<a class="navbar-brand" href="/">EFED</a>
+		<div class="d-flex flex-row order-2 order-lg-3"> 
+			<ul class="navbar-nav flex-row">
+			<% if(!currentUser){ %>
+				<li class="nav-item">
+					<a class="nav-link px-2" href="/login">Login</a>
+				</li>
+				<li class="nav-item">
+					<a class="nav-link px-2" href="/register">Sign Up</a>
+				</li>
+			<% } else { %>
+				<li class="nav-item">
+					<a class="nav-link px-2" href="/members/<%= currentUser.username %>"><%= currentUser.username %></a>
+				</li>
+				<li class="nav-item">
+					<a class="nav-link px-2" href="/members/<%= currentUser.username %>/edit">Edit Profile</a>
+				</li>
+				<li class="nav-item">
+					<a class="nav-link px-2" href="/logout">Logout</a>
+				</li>
+			<% } %>
+			</ul>
+			<button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarText">
+				<span class="navbar-toggler-icon"></span>
+			</button>
 		</div>
-	<% } %>
-	<% if(success && success.length > 0){ %>
-		<div class="alert alert-success" role="alert">
-			<%= success %>
+		<div class="collapse navbar-collapse order-3 order-lg-2" id="navbarText">
+			<ul class="navbar-nav mr-auto">
+				<li class="nav-item">
+					<a class="nav-link" href="/shows">Shows</a>
+				</li>
+				<li class="nav-item">
+					<a class="nav-link" href="/roster">Roster</a>
+				</li>
+				<li class="nav-item">
+					<a class="nav-link" href="/champions">Champions</a>
+				</li>
+				<li class="nav-item">
+					<a class="nav-link" href="/roleplays">Roleplays</a>
+				</li>
+				<li class="nav-item">
+					<a class="nav-link" href="#">Community</a>
+				</li>
+			</ul>
 		</div>
-	<% } %>
-	<% if(errors && errors.length > 0){ %>
-  		<% errors.forEach(function(error){ %>
-			<div class="alert alert-danger" role="alert">
-				<%= error.msg %>
-			</div>
-		<% }); %>
-	<% } %>
+	</nav>
+		
 
