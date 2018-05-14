@@ -5,6 +5,7 @@
 <p><%= roleplay.displayName %></p>
 <p><%= roleplay.datePosted %></p>
 <p><%= roleplay.content %></p>
+<% if(currentUser && roleplay.user_id == currentUser.user_id){ %>
 <a class="btn btn-warning" href="/roleplays/<%= roleplay.email %>/<%= roleplay.slug %>/edit">Edit Profile</a>
-
+<% } %>
 <% include ../partials/footer %>

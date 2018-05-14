@@ -8,6 +8,7 @@
 <p><%= wrestler.hometown %></p>
 <p><%= wrestler.finisher %></p>
 <p><%= wrestler.themeMusic %></p>
+<% if(currentUser && user.user_id == currentUser.user_id){ %>
 <a class="btn btn-warning" href="/roster/<%= wrestler.slug %>/edit">Edit Profile</a>
-
+<% } %>
 <% include ../partials/footer %>

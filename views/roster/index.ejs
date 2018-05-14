@@ -5,6 +5,7 @@
 	<li class="list-group-item"><a href="/roster/<%= wrestler.slug %>"><%= wrestler.name %></a></li>
 	<% }); %>
 </ul>
+<% if(currentUser){ %>
 <a class="btn btn-warning" href="/roster/apply">Sign a contract</a>
-
+<% } %>
 <% include ../partials/footer %>

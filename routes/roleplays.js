@@ -67,7 +67,7 @@ router.post("/", middleware.isLoggedIn, function(req, res){
 
 // show roleplay route
 router.get("/:email/:slug", function(req, res){
-	db.query('SELECT roleplays.title, roleplays.datePosted, roleplays.content, roleplays.slug, roster.name, users.email, users.displayName FROM roleplays INNER JOIN users ON users.email=? INNER JOIN roster ON roster.wrestler_id=roleplays.wrestler_id WHERE roleplays.slug = ?', [req.params.email, req.params.slug], function(err, foundRP, fields){
+	db.query('SELECT roleplays.title, roleplays.datePosted, roleplays.content, roleplays.user_id, roleplays.slug, roster.name, users.email, users.displayName FROM roleplays INNER JOIN users ON users.email=? INNER JOIN roster ON roster.wrestler_id=roleplays.wrestler_id WHERE roleplays.slug = ?', [req.params.email, req.params.slug], function(err, foundRP, fields){
 		if(err || !foundRP.length > 0){
 			console.log(foundRP);
 			req.flash('error', 'No roleplay found');

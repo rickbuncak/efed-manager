@@ -5,6 +5,8 @@
 	<li class="list-group-item"><a href="/roleplays/<%= roleplay.email %>/<%= roleplay.slug %>"><%= roleplay.title %> | <%= roleplay.name %> | <%= roleplay.displayName %></a></li>
 	<% }); %>
 </ul>
+<% if(currentUser){ %>
 <a class="btn btn-warning" href="/roleplays/post">Post a roleplay</a>
+<% } %>
 
 <% include ../partials/footer %>

@@ -62,7 +62,7 @@ router.get("/:slug", function(req, res){
 		if(err || !foundWrestler){
 			console.log(err);
 		} else {
-			db.query('SELECT users.email, users.displayName FROM users INNER JOIN roster ON users.user_id=roster.user_id', function(err, foundUser, fields){
+			db.query('SELECT users.user_id, users.email, users.displayName FROM users INNER JOIN roster ON users.user_id=roster.user_id', function(err, foundUser, fields){
 				if(err){
 					console.log(err);
 				} else {
