@@ -1,25 +1,26 @@
 <% include ../partials/header %>
 
-<h1>Post Roleplay</h1>
-
-<form action="/roleplays" method="POST">
-	<label for="title">
-		Name:
-    	<input type="text" name="title" placeholder="Roleplay Title">
-    </label>
-    <label for="wrestler">
-		Name:
-    	<select name="wrestler_id">
-    		<% wrestler.forEach(function(wrestler){ %>
-			<option value="<%= wrestler.wrestler_id %>"><%= wrestler.name %></option>
-			<% }); %>
-		</select>
-    </label>
-    <label for="content">
-		Weight:
-    	<textarea name="content" placeholder="Lorem ipsum dolor sit amet, consectetur adipiscing elit."></textarea>
-    </label>
-    <button>Submit</button>
-</form>
+    <div class="container">
+        <h1>Post Roleplay</h1>
+        <form action="/roleplays" method="POST">
+            <div class="form-group">
+            	<label for="title">Title</label>
+                <input type="text" class="form-control" name="title" placeholder="Roleplay Title">
+            </div>
+            <div class="form-group">
+                <label for="wrestler_id">Wrestler</label>
+            	<select class="form-control" name="wrestler_id">
+            		<% wrestler.forEach(function(wrestler){ %>
+        			<option value="<%= wrestler.wrestler_id %>"><%= wrestler.name %></option>
+        			<% }); %>
+        		</select>
+            </div>
+            <div class="form-group">
+                <label for="roleplay">Roleplay </label>
+            	<textarea class="form-control" name="roleplay" placeholder="Lorem ipsum dolor sit amet, consectetur adipiscing elit."></textarea>
+            </div>
+            <button>Submit</button>
+        </form>
+    </div>
 
 <% include ../partials/footer %>

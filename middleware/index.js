@@ -5,7 +5,7 @@ var middlewareObj = {};
 
 middlewareObj.hasCharacter = function(req, res, next) {
     // check if user isAuthenticated and user is stored in session
-    if(req.isAuthenticated() && req.user){
+    if(req.isAuthenticated() || req.user){
         db.query('SELECT * FROM roster WHERE user_id = ?', [req.user.user_id], function(err, foundWrestler, fields){
             if(err){ console.log(err);
             // if user has no wrestlers, set hasWrestlers to false

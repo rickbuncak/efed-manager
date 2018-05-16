@@ -1,28 +1,29 @@
 <% include ../partials/header %>
 
-<h1>Post Roleplay</h1>
-
-<form action="/roleplays/<%= roleplay.email %>/<%= roleplay.slug %>?_method=PUT" method="POST">
-	<label for="title">
-		Name:
-    	<input type="text" name="title" value="<%= roleplay.title %>">
-    </label>
-    <label for="wrestler">
-		Name:
-    	<select name="wrestler_id">
-    		<% wrestler.forEach(function(wrestler){ %>
-				<option value="<%= wrestler.wrestler_id %>" 
+	<div class="container">
+        <h1>Edit Roleplay</h1>
+        <form action="/roleplays/<%= roleplay.email %>/<%= roleplay.slug %>?_method=PUT" method="POST">
+            <div class="form-group">
+            	<label for="title">Title</label>
+                <input type="text" class="form-control" name="title" value="<%= roleplay.title %>">
+            </div>
+            <div class="form-group">
+                <label for="wrestler_id">Wrestler</label>
+            	<select class="form-control" name="wrestler_id">
+            		<% wrestler.forEach(function(wrestler){ %>
+        			<option value="<%= wrestler.wrestler_id %>" 
 					<% if(JSON.stringify(wrestler.wrestler_id) == JSON.stringify(roleplay.wrestler_id)) { %> selected <% } %>>
 					<%= wrestler.name %>
-				</option>
-			<% }); %>
-		</select>
-    </label>
-    <label for="content">
-		Weight:
-    	<textarea name="content"><%= roleplay.content %></textarea>
-    </label>
-    <button>Submit</button>
-</form>
+					</option>
+        			<% }); %>
+        		</select>
+            </div>
+            <div class="form-group">
+                <label for="roleplay">Roleplay </label>
+            	<textarea class="form-control" name="content"><%= roleplay.content %></textarea>
+            </div>
+            <button class="btn btn-primary">Submit</button>
+        </form>
+    </div>
 
 <% include ../partials/footer %>

@@ -1,33 +1,34 @@
 <% include ../partials/header %>
 
-<h1>Sign a Contract</h1>
-
-<form action="/roster" method="POST">
-	<label for="name">
-		Name:
-    	<input type="text" name="name" placeholder="AJ Styles">
-    </label>
-    <label for="nickname">
-		Name:
-    	<input type="text" name="nickname" placeholder="The Phenomenal">
-    </label>
-    <label for="weight">
-		Weight:
-    	<input type="text" name="weight" placeholder="218 lbs">
-    </label>
-    <label for="hometown">
-		Email:
-    	<input type="text" name="hometown" placeholder="Gainesville, GA">
-    </label>
-    <label for="finisher">
-		Finishing Move:
-    	<input type="text" name="finisher" placeholder="Styles Clash">
-    </label>
-    <label for="themeMusic">
-		Email:
-    	<input type="text" name="themeMusic" placeholder="&quot;Phenomenal&quot; by CFO$">
-    </label>
-    <button>Submit</button>
-</form>
+    <div class="container">
+        <h1>Sign a Contract</h1>
+        <form action="/roster" method="POST">
+        	<div class="form-group">
+                <label for="name">Wrestler Name</label>
+            	<input type="text" class="form-control" name="name" placeholder="AJ Styles">
+            </div>
+            <div class="form-group">
+                <label for="nickname">Nickname</label>
+            	<input type="text" class="form-control" name="nickname" placeholder="The Phenomenal">
+            </div>
+            <div class="form-group">
+                <label for="weight">Weight</label>
+            	<input type="text" class="form-control" name="weight" placeholder="218 lbs">
+            </div>
+            <div class="form-group">
+                <label for="hometown">Hometown</label>
+            	<input type="text" class="form-control" name="hometown" placeholder="Gainesville, GA">
+            </div>
+            <div class="form-group">
+                <label for="finisher">Finishing Move</label>
+            	<input type="text" class="form-control" name="finisher" placeholder="Styles Clash">
+            </div>
+            <div class="form-group">
+                <label for="themeMusic">Theme Music</label>
+            	<input type="text" class="form-control" name="themeMusic" placeholder="&quot;Phenomenal&quot; by CFO$">
+            </div>
+            <button class="btn btn-primary">Submit</button>
+        </form>
+    </div>
 
 <% include ../partials/footer %>

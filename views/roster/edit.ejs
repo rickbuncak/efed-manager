@@ -1,32 +1,33 @@
 <% include ../partials/header %>
 
-<form action="/roster/<%= wrestler.slug %>?_method=PUT" method="POST">
-    <label for="name">
-        Name:
-        <input type="text" name="name" value="<%= wrestler.name %>">
-    </label>
-    <label for="nickname">
-        Name:
-        <input type="text" name="nickname" value="<%= wrestler.nickname %>">
-    </label>
-    <label for="weight">
-        Weight:
-        <input type="text" name="weight" value="<%= wrestler.weight %>">
-    </label>
-    <label for="hometown">
-        Email:
-        <input type="text" name="hometown" value="<%= wrestler.hometown %>">
-    </label>
-    <label for="finisher">
-        Finishing Move:
-        <input type="text" name="finisher" value="<%= wrestler.finisher %>">
-    </label>
-    <label for="themeMusic">
-        Email:
-        <input type="text" name="themeMusic" value="<%= wrestler.themeMusic %>">
-    </label>
-    <button>Submit</button>
-</form>
-
+    <div class="container">
+        <form action="/roster/<%= wrestler.slug %>?_method=PUT" method="POST">
+            <div class="form-group">
+                <label for="name">Wrestler Name</label>
+                <input type="text" class="form-control" name="name" value="<%= wrestler.name %>">
+            </div>
+            <div class="form-group">
+                <label for="nickname">Nickname</label>
+                <input type="text" class="form-control" name="nickname" value="<%= wrestler.nickname %>">
+            </div>
+            <div class="form-group">
+                <label for="weight">Weight</label>
+                <input type="text" class="form-control" name="weight" value="<%= wrestler.weight %>">
+            </div>
+            <div class="form-group">
+                <label for="hometown">Hometown</label>
+                <input type="text" class="form-control" name="hometown" value="<%= wrestler.hometown %>">
+            </div>
+            <div class="form-group">
+                <label for="finisher">Finishing Move</label>
+                <input type="text" class="form-control" name="finisher" value="<%= wrestler.finisher %>">
+            </div>
+            <div class="form-group">
+                <label for="themeMusic">Theme Music</label>
+                <input type="text" class="form-control" name="themeMusic" value="<%= wrestler.themeMusic %>">
+            </div>
+            <button class="btn btn-primary">Submit</button>
+        </form>
+    </div>
 
 <% include ../partials/footer %>
