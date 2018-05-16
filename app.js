@@ -45,6 +45,14 @@ app.use(session({
 }));
 app.use(passport.initialize());
 app.use(passport.session());
+passport.serializeUser(function(user_id, done) {
+	done(null, user_id);
+});
+passport.deserializeUser(function(id, done) {
+	db.query("SELECT user_id, email, displayName, hasWrestler, isAdmin FROM Users WHERE user_id=?",[id.user_id],function(err,rows){
+		done(err,rows[0]); 
+	});
+});
 passport.use(new LocalStrategy({usernameField: 'email'}, function(username, password, done) {
   	db.query("SELECT user_id, password FROM users WHERE email = ?", [username], function(err, results, fields) {
   		if(err) { done(err) };
@@ -62,22 +70,6 @@ passport.use(new LocalStrategy({usernameField: 'email'}, function(username, pass
 	  	}
   	})
 }));
-passport.serializeUser(function(user_id, done) {
-	done(null, user_id);
-});
-passport.deserializeUser(function(id, done) {
-	db.query("SELECT * FROM Users WHERE user_id=?",[id.user_id],function(err,rows){
-		if(err) {
-		console.log(err);
-		} else {
-			if(rows.length!=0){ 
-				done(err,rows[0]); 
-			} else{ 
-				done(err,null); 
-			}
-		}
-	});
-});
 
 app.use(function(req, res, next){
     res.locals.currentUser = req.user;

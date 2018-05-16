@@ -18,7 +18,7 @@
 					<a class="nav-link px-2" href="/register">Sign Up</a>
 				</li>
 			<% } else { %>
-			<% console.log(currentUser);%>
+			<% console.log(currentUser); %>
 				<li class="nav-item">
 					<a class="nav-link px-2" href="/members/<%= currentUser.email %>"><%= currentUser.email %></a>
 				</li>
